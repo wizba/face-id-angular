@@ -1,0 +1,16 @@
+<div *ngIf="isModelLoaded; else loading">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    <div *ngIf="imageSrc" style="position: relative; display: inline-block;">
+        <img #imageElement [src]="imageSrc" style="max-width: 500px;" alt="Uploaded image for face recognition">
+        <canvas #canvasElement style="position: absolute; top: 0; left: 0;"></canvas>
+    </div>
+    <div *ngIf="detectedName" style="margin-top: 20px; font-size: 24px; font-weight: bold;">
+        Detected Person: {{ detectedName }}
+    </div>
+    <div *ngIf="matchConfidence !== null" style="margin-top: 10px;">
+        Match Confidence: {{ matchConfidence | number:'1.0-2' }}%
+    </div>
+</div>
+<ng-template #loading>
+    <div>Loading face recognition models... Please wait.</div>
+</ng-template>
